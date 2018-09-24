@@ -191,7 +191,7 @@ public class Callout extends Group {
                                 HBox subTitle) {
 
         // generate a sequence animation
-        SequentialTransition calloutAnimation = new SequentialTransition();
+        calloutAnimation = new SequentialTransition();
 
         // Allow animation to go in reverse
         calloutAnimation.setCycleCount(2);
