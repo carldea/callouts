@@ -1,8 +1,24 @@
+/*
+ * Copyright (c) 2018. Carl Dea
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.carlfx.callouts;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -39,7 +55,7 @@ public class Main extends Application {
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(primaryStage.widthProperty());
 
-        Callout callout1 = CalloutBuilder.create()
+        com.carlfx.callouts.Callout callout1 = com.carlfx.callouts.CalloutBuilder.create(com.carlfx.callouts.CustomCallout.class)
                 .headPoint(600, 550)
                 .leaderLineToPoint(400, 300)
                 .endLeaderLineLeft()
@@ -48,7 +64,7 @@ public class Main extends Application {
                 .pause(5000)
                 .build();
 
-        Callout callout2 = CalloutBuilder.create()
+        com.carlfx.callouts.Callout callout2 = com.carlfx.callouts.CalloutBuilder.create()
                 .headPoint(200, 550)
                 .leaderLineToPoint(400, 350.5)
                 .endLeaderLineRight()
@@ -57,7 +73,7 @@ public class Main extends Application {
                 .pause(5000)
                 .build();
 
-        Callout callout3 = CalloutBuilder.create()
+        com.carlfx.callouts.Callout callout3 = com.carlfx.callouts.CalloutBuilder.create()
                 .headPoint(498, 186)
                 .leaderLineToPoint(375, 406)
                 .endLeaderLineLeft()
@@ -66,7 +82,7 @@ public class Main extends Application {
                 .pause(5000)
                 .build();
 
-        Callout callout4 = CalloutBuilder.create()
+        com.carlfx.callouts.Callout callout4 = com.carlfx.callouts.CalloutBuilder.create()
                 .headPoint(667, 400)
                 .leaderLineToPoint(778, 576)
                 .endLeaderLineRight()
@@ -76,6 +92,15 @@ public class Main extends Application {
                 .build();
 
         root.getChildren().add(imageView);
+        Label instructions = new Label("Please press a number 1-4");
+
+        instructions.setStyle("-fx-text-fill: white; " +
+                "-fx-background-color: linear-gradient(#f4ce42, #f4a941); " +
+                "-fx-effect: dropshadow(three-pass-box , rgba(0,0,0,0.6), 5, 0.0 , 0 , 1 );" +
+                "-fx-border-insets: 10;" +
+                "-fx-font-size: 20;" +
+                "-fx-label-padding: 5;");
+        root.getChildren().add(instructions);
         root.getChildren().addAll(callout1, callout2, callout3, callout4);
 
         // Animate 1-4 callouts to point out things in the picture

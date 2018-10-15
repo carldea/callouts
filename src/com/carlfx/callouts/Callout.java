@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2018. Carl Dea
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.carlfx.callouts;
 
 import javafx.animation.*;
@@ -17,6 +32,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**
+ * This class represent the parts that make up a callout.
+ * Many protected methods allow an implementor to override to customize
+ * their own callout. For example you can override the buildHeadAnim(Node head) method
+ * with your own JavaFX shape such as a rectangle or circle Node.
+ */
 public class Callout extends Group {
     public static int LEFT = -1;
     public static int RIGHT = 1;
@@ -99,8 +120,8 @@ public class Callout extends Group {
     }
 
     /**
-     *
-     * @return
+     * Returns the x,y coordinate of th end point of the end leader line.
+     * @return Point2D the x,y coordinate of the end point of end leader line.
      */
     protected Point2D calcEndPointOfLeaderLine() {
         // Position of the end of the leader line
@@ -115,8 +136,11 @@ public class Callout extends Group {
         head.setFill(Color.WHITE);
 
         // First leader line
-        Line firstLeaderLine = new Line(headPoint.getX(), headPoint.getY(),
-                headPoint.getX(), headPoint.getY());
+        Line firstLeaderLine = new Line(getHeadPoint().getX(),
+                getHeadPoint().getY(),
+                getHeadPoint().getX(),
+                getHeadPoint().getY());
+
         firstLeaderLine.setStroke(Color.WHITE);
         firstLeaderLine.setStrokeWidth(3);
 
@@ -232,7 +256,7 @@ public class Callout extends Group {
                 new KeyFrame(Duration.millis(1),
                         new KeyValue(headCircle.visibleProperty(), true),
                         new KeyValue(headCircle.radiusProperty(), 0)), // show
-                new KeyFrame(Duration.millis(300),
+                new KeyFrame(Duration.millis(200),
                         new KeyValue(headCircle.radiusProperty(), 5.0d)) // max value
         );
     }
@@ -241,7 +265,7 @@ public class Callout extends Group {
         return new Timeline(
                 new KeyFrame(Duration.millis(1),
                         new KeyValue(firstLeaderLine.visibleProperty(), true)), // show
-                new KeyFrame(Duration.millis(300),
+                new KeyFrame(Duration.millis(200),
                         new KeyValue(firstLeaderLine.endXProperty(), getLeaderLineToPoint().getX()),
                         new KeyValue(firstLeaderLine.endYProperty(), getLeaderLineToPoint().getY())
                 )
@@ -336,7 +360,7 @@ public class Callout extends Group {
                 new KeyFrame(Duration.millis(1),
                         new KeyValue(subTitleRect.visibleProperty(), true),
                         new KeyValue(subTitleRect.heightProperty(), 0)), // show
-                new KeyFrame(Duration.millis(300),
+                new KeyFrame(Duration.millis(200),
                         new KeyValue(subTitleRect.heightProperty(), 20)
                 )
         );
@@ -397,7 +421,9 @@ public class Callout extends Group {
         calloutAnimation.stop();
         calloutAnimation.setRate(1.0);
         getChildren().forEach(node -> node.setVisible(false));
-        calloutAnimation.play();
+        if(calloutAnimation != null) {
+            calloutAnimation.play();
+        }
     }
 
     public void play(double rate) {
