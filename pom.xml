@@ -17,11 +17,14 @@
     <licenses>
         <license>
             <comments>
-                * This code was Written by Carl Dea, and released to the
-                * public domain.
+                * Licensed under the Apache License, Version 2.0 (the "License");
+                * you may not use this file except in compliance with the License.
+                * You may obtain a copy of the License at
+                *
+                * http://www.apache.org/licenses/LICENSE-2.0
             </comments>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <name>Apache License</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -47,11 +50,11 @@
     </issueManagement>
 
     <properties>
-        <mainClassName>com.carlfx.callouts.Main</mainClassName>
+        <mainClassName>com.carlfx.callouts/com.carlfx.callouts.Main</mainClassName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
         <jfx.plugin.version>0.0.5</jfx.plugin.version>
-        <org.openjfx.version>15.0.1</org.openjfx.version>
+        <javafx.version>15.0.1</javafx.version>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
     </properties>
@@ -60,7 +63,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>${org.openjfx.version}</version>
+            <version>${javafx.version}</version>
         </dependency>
     </dependencies>
 
@@ -69,6 +72,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
