@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.carlfx.callout</groupId>
+    <artifactId>callout-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+
+    <name>Callout Demo</name>
+    <url>https://github.com/carldea/callouts</url>
+    <description>
+        Callout Demo is a JavaFX Application showcasing callouts that are animated.
+    </description>
+
+    <licenses>
+        <license>
+            <comments>
+                * This code was Written by Carl Dea, and released to the
+                * public domain.
+            </comments>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>carldea</id>
+            <name>Carl Dea</name>
+            <url>https://github.com/carldea</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>scm:git:git://github.com/carldea/callouts.git</url>
+        <connection>scm:git:git://github.com/carldea/callouts.git</connection>
+        <developerConnection>scm:git:git@github.com:carldea/callouts.git</developerConnection>
+        <tag>0.0.1</tag>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/carldea/callouts/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <properties>
+        <mainClassName>com.carlfx.callouts.Main</mainClassName>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>4.12</junit.version>
+        <jfx.plugin.version>0.0.5</jfx.plugin.version>
+        <org.openjfx.version>15.0.1</org.openjfx.version>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${org.openjfx.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${jfx.plugin.version}</version>
+                <configuration>
+                    <mainClass>${mainClassName}</mainClass>
+                    <includePathExceptionsInClasspath>true</includePathExceptionsInClasspath>                    
+                </configuration>
+            
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>${mainClassName}</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>debug</id>
+                        <configuration>
+                            <debug>true</debug>
+                            <debuglevel>lines,vars,source</debuglevel>
+                            <options>
+<!--                                <option>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>-->
+                                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>
+                            </options>
+                            <mainClass>${mainClassName}</mainClass>
+                            <includePathExceptionsInClasspath>true</includePathExceptionsInClasspath>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>    
+                            </execution>  
+                        </executions>
+                    </plugin>      	
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>		                    
+                </plugins>
+            </build>
+        </profile>
+    </profiles>   
+</project>
