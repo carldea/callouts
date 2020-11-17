@@ -55,8 +55,8 @@
         <junit.version>4.12</junit.version>
         <jfx.plugin.version>0.0.5</jfx.plugin.version>
         <javafx.version>15.0.1</javafx.version>
-<!--        <maven.compiler.source>11</maven.compiler.source>-->
-<!--        <maven.compiler.target>11</maven.compiler.target>-->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
