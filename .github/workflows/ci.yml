@@ -5,14 +5,21 @@ on: [push]
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, macOS-latest, windows-2016]
+        java: [9, 10, 11, 11.0.3, 12, 13, 13.0.4, 14, 15, 16-ea]
+      fail-fast: false
+      max-parallel: 4
+    name: Test JDK ${{ matrix.java }}, ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 15.0.1
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 15.0.1
+          java-version: ${{ matrix.java }}
 
       - name: Verify with Maven
         run: mvn verify -B --file pom.xml
